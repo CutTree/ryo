@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スライドショー（丸）</title>
+
+    <style>
+        body{
+            background-color: rgb(139, 46, 0);
+            margin: 0;
+            width: 100%;
+        }
+
+        .slide_sho_image{
+            text-align:center;
+            margin: 0 auto;
+            padding-top: 1vh;/*調整してください（単位も）*/
+        }
+
+
+        .slide_sho_image img{
+              border-radius: 50%;
+              width: 50%;/*調整してください（単位も）*/
+        }
+
+        .show_image{
+            display: block;
+            background-color: white;
+            width: 50vh;
+            height: 50vh;
+            text-align: center;
+            margin: 0 auto;
+            border-radius: 50%;
+        }
+
+        #text_titile{
+            color: white;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+   <div class="slide_sho_image">
+        <img src="https://1.bp.blogspot.com/-VthzAuEo8fc/X96mhYv33UI/AAAAAAABdBs/HXCc0J0WsHUMSuQ00UZ5UuLPUXatMIq-wCNcBGAsYHQ/s350/onepiece01_luffy2.png" width="100%" id="slide" alt="">
+        <p id="text_titile">ルフィ</p>　　
+    </div>
+
+    <script>
+
+        const imgArrey = 
+        [
+            {src:'https://1.bp.blogspot.com/-VthzAuEo8fc/X96mhYv33UI/AAAAAAABdBs/HXCc0J0WsHUMSuQ00UZ5UuLPUXatMIq-wCNcBGAsYHQ/s350/onepiece01_luffy2.png',title:'ルフィ'},
+            {src:'https://1.bp.blogspot.com/-rzRcgoXDqEg/YAOTCKoCpPI/AAAAAAABdOI/5Bl3_zhOxm07TUGzW8_83cXMOT9yy1VJwCNcBGAsYHQ/s400/onepiece02_zoro_bandana.png',title:'ゾロ'},
+            {src:'https://1.bp.blogspot.com/-2ut_UQv3iss/X-Fcs_0oAII/AAAAAAABdD8/jrCZTd_xK-Y6CP1KwOtT_LpEpjp-1nvxgCNcBGAsYHQ/s400/onepiece03_nami.png',title:'ナミ'},
+            {src:'https://1.bp.blogspot.com/-HPG_x7XPky8/X-FctLTLkKI/AAAAAAABdEE/xs4T8m0FiBAFptXHGQhQ2c9ZmVWtaeQSgCNcBGAsYHQ/s400/onepiece05_sanji.png',title:'サンジ'},
+            {src:'https://1.bp.blogspot.com/-mZpzgXC1Sxk/YAOTCAKwWTI/AAAAAAABdOM/5B4hXli0KLU5N-BySHgjVbhZscKLSE-bQCNcBGAsYHQ/s400/onepiece04_usopp_sogeking.png',title:'ウソップ'}
+        ];
+
+        let counter = 0;/*カウンターなのでイジらない*/
+
+
+        function slide_time() {
+            if (counter >= imgArrey.length-1) {
+                counter = 0;                
+            }else{
+                counter++
+            };
+            document.getElementById('slide').src = imgArrey[counter].src;  
+            document.getElementById('text_titile').innerText = imgArrey[counter].title;    
+        };
+
+
+
+        setInterval(slide_time,2000);/*数字は切り替えの秒数（調整可能）*/
+
+
+
+
+    </script>
+    
+</body>
+</html>

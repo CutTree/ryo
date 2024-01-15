@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+<body>
+
+    <input id="search" type="text" placeholder="商品番号" value="">
+    <input id="searchBtn" type="button" value="検索" onclick="Btn()">
+
+    <script>
+        const searchBtn = document.getElementById('searchBtn');
+        Btn = searchBtn.addEventListener('click',function () {
+            const search = document.getElementById('search');
+            location.href = "https://search.rakuten.co.jp/search/mall/" + search.value + "?sid=272978";  
+            //window.alert('Heloo' + search.value);
+        })
+
+        Btn();
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bound</title>
+
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+
+        canvas{
+            background-color: rgb(224, 224, 224);
+            display: block;
+            margin: 0 auto;
+        }
+
+        #left{
+            background-color: rgb(34, 0, 129);
+            color: rgb(255, 255, 255);
+            margin: 0 auto;
+            padding: 0;
+            height: 50px;
+            width: 49%;
+        }
+
+        #right{
+            background-color: rgb(34, 0, 129);
+            color: rgb(255, 255, 255);
+            margin: 0 auto;
+            padding: 0;
+            height: 50px; 
+            width: 49%; 
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <canvas id="ball"></canvas>
+    <button id="left">Left</button>
+    <button id="right">Right</button>
+
+    <script>
+        let canvas = document.getElementById('ball');
+        canvas.width = innerWidth;
+        canvas.height = innerHeight-50;
+        let ctx = canvas.getContext('2d');
+
+        const btnLeft = document.getElementById('left');
+        const btnRight = document.getElementById('right')
+
+        let x = canvas.width/2;
+        let y = canvas.height-30;
+
+        let dx = 2;
+        let dy = -2;
+
+        ballRadius = 10;
+
+        let paddleHeight = 10;
+        let paddleWidth = 100;
+        let paddleX = (canvas.width-paddleWidth)/2;
+
+        let rightPressed = false;
+        let leftPressed =false;
+
+        let brickRowCount = 3;
+        let brickColumCount = 7;
+        let brickWidth = canvas.width/10;
+        let brickHeight = 20;
+        let brickPadding = canvas.width/100;
+        let brickOffSetTop = 30;
+        let brickOffSetLeft = canvas.width/10;
+
+        let score = 0;  
+
+        let bricks = [];
+        for (let c = 0; c < brickColumCount; c++) {//　[c]は列
+            bricks[c] = [];
+            for (let r = 0; r < brickRowCount; r++) {//　[r]は行
+                bricks[c][r] = { x : 0, y : 0, status: 1 }; //status: 1の意味が分からない               
+            }            
+        }
+        
+        document.addEventListener('keydown',keyDownHandler,false);
+        document.addEventListener('keyup',keyUpHandler,false);
+
+        //document.addEventListener('mousemove',move,false);
+
+        btnRight.addEventListener('click',function() {
+            if(paddleX < canvas.width-paddleWidth){
+                paddleX += 100                 
+            }
+                          
+        })
+
+        btnLeft.addEventListener('click',function() {
+            if (paddleX > 0) {
+                paddleX -= 100;                 
+            }
+                       
+        })
+
+
+
+        /*function move(e) {
+            let relativeX = e.clientX - canvas.offsetLeft;
+            if (relativeX > 0 && relativeX < canvas.width) {
+                paddleX = relativeX - paddleWidth/2;                
+            }            
+        }*/
+
+        function keyDownHandler(e) {
+            if (e.key == 'Right' || e.key == 'ArrowRight') {
+                rightPressed = true;            
+            } else if(e.key == 'Left' || e.key == 'ArrowLeft'){
+                leftPressed = true;                
+            }           
+        }
+
+        function keyUpHandler(e) {  
+            if (e.key == 'Right' || e.key == 'ArrowRight') {
+                rightPressed = false;            
+            } else if(e.key == 'Left' || e.key == 'ArrowLeft'){
+                leftPressed = false;                                          
+            }           
+        }
+
+        function collisionDetection() {
+            for (let c = 0; c < brickColumCount ; c++) {
+                for (let r = 0; r < brickRowCount; r++) {
+                    let b = bricks[c][r];
+                    if (b.status == 1) {
+                        if (x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickOffSetLeft) {
+                            dy = -dy;
+                            b.status = 0;
+                            score++;
+                            if (score == brickRowCount * brickColumCount) {
+                                alert('YOU WIN, CONGRATULATIONS!');
+                                document.location.reload();
+                                
+                            }
+                        }                                            
+                    }
+               }               
+            }
+        } 
+        
+        function drawScore() {
+            ctx.font = '16px Arial';
+            ctx.fillStyle = 'rgb(34, 0, 129)';
+            ctx.fillText('Score: '+score,8,20);
+        }
+
+        function drawBall() {
+            ctx.beginPath();
+            ctx.arc(x,y,ballRadius,0,Math.PI*2);
+            ctx.fillStyle = "rgb(34, 0, 129)";
+            ctx.fill();
+            ctx.closePath();           
+        }
+
+        function drawPaddle() {
+            ctx.beginPath();
+            ctx.rect(paddleX,canvas.height-paddleHeight,paddleWidth,paddleHeight);
+            ctx.fillStyle = 'rgb(34, 0, 129)';   
+            ctx.fill();
+            ctx.closePath();            
+        }
+
+        function drawBricks() {
+            for (let c = 0; c < brickColumCount; c++) {
+                for (let r = 0; r < brickRowCount; r++) {
+                    if (bricks[c][r].status == 1) {
+                        let brickX = (c*(brickWidth + brickPadding)) + brickOffSetLeft;
+                        let brickY = (r*(brickHeight + brickPadding)) + brickOffSetTop; 
+                        bricks[c][r].x = brickX;
+                        bricks[c][r].y = brickY;
+                        ctx.beginPath();
+                        ctx.rect(brickX,brickY,brickWidth,brickHeight);
+                        ctx.fillStyle = 'rgb(34, 0, 129)'; 
+                        ctx.fill();     
+                        ctx.closePath();                        
+                    }                  
+                }                
+            }
+            
+        }
+
+        function draw() {
+            ctx.clearRect(0,0,canvas.width,canvas.height);  
+            drawBricks();
+            drawBall(); 
+            collisionDetection();   
+            drawPaddle();
+            drawScore();
+
+            if (x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
+                dx = -dx;   
+            }
+
+            if (y + dy < ballRadius) {//上or下の端からハミ出たらの式
+                dy = -dy;             
+            }else if (y + dy > canvas.height-ballRadius){
+                if (x > paddleX && x < paddleX + paddleWidth) {
+                    dy = -dy;                    
+                }else{
+                    alert('GAME OVER');
+                    document.location.reload();
+                }
+            }
+
+            if (rightPressed && paddleX < canvas.width-paddleWidth) {
+                paddleX += 7;               
+            } else if(leftPressed && paddleX > 0){
+                paddleX -= 7;
+            }
+            
+            x += dx;
+            y += dy;
+        }
+
+
+        let interval = setInterval(draw,10);
+
+        /*
+        ctx.beginPath();
+        ctx.arc(120,140,100,0,Math.PI*2);
+        ctx.fillStyle = "#FF0000";
+        ctx.fill();
+        ctx.closePath();
+        */
+
+        
+    </script>
+</body>
+</html>

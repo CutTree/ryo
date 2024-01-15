@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slider2</title>
+
+    <style>
+    body{
+        margin: 0;        
+    }
+
+    #container{
+        position: relative;
+    }
+
+    #slider_box{
+        list-style: none;
+        padding: 0;
+        overflow: hidden;
+        scroll-behavior: smooth;
+        display: block;
+        white-space: nowrap;
+        transition: all 3s;
+    }
+
+    .item_list{
+        display: inline;
+    }
+
+    #click_button{
+        text-align: center;
+        margin: 0;
+    }
+
+    #prev{
+        width: 49%;
+        background-color: black;
+        color: white;
+    }
+
+    #next{
+        width: 49%;
+        background-color: black;
+        color: white
+    }
+    </style>
+
+</head>
+<body>
+
+    <div id="container">
+        <ul id="slider_box">
+            <li class="item_list">
+                <img src="https://image.rakuten.co.jp/nishida-store/cabinet/06059528/brand1.jpg" width="100%">
+            </li>
+            <li class="item_list">
+                    <img src="https://image.rakuten.co.jp/nishida-store/cabinet/06059528/imgrc0091856073.jpg" width="100%">
+            </li>
+            <li class="item_list">
+                <img src="https://image.rakuten.co.jp/nishida-store/cabinet/06059528/imgrc0091832780.jpg" width="100%">
+            </li>
+            <li class="item_list">
+                <img src="https://image.rakuten.co.jp/nishida-store/cabinet/06059528/imgrc0092777391.jpg" width="100%">
+            </li>
+            <li class="item_list">
+                <img src="https://image.rakuten.co.jp/nishida-store/cabinet/06059528/atelier.jpg" width="100%">
+            </li>
+        </ul>
+    </div>
+    <div id="click_button">
+        <button id="prev">前</button>
+        <button id="next">次</button>
+    </div>    
+</body>
+
+<script>
+    //ulタグの取得
+    const slider_box = document.getElementById('slider_box');
+    //ulタグの長さを取得
+    const Width = slider_box.clientWidth;
+    //liタグを取得HTML Collection: ALL; length: 0;
+    const ItemList = document.getElementsByTagName('li');
+    //ボタンを取得
+    const Prev = document.getElementById('prev');
+    const Next = document.getElementById('next');
+    //クリックで動きを付ける
+    Prev.addEventListener('click',function(){
+        for(i = 0; i < slider_box.childElementCount; i++ ){
+        //window.alert('こんにちわ');
+        slider_box.scrollBy(-window.innerWidth,0);
+        }
+    });
+
+    Next.addEventListener('click',function(){
+        for(i = 0; i < slider_box.childElementCount; i++ ){
+        //window.alert('こんにちわ');
+        slider_box.scrollBy(window.innerWidth,0)
+        }
+    });
+
+    console.log(slider_box);
+</script>
+
+</html>
