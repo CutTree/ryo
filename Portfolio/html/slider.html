@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>slider</title>
+
+    <style>
+        body{
+            margin: 0;
+        }
+
+        .slider{
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #prev{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 1.1rem;
+            background-color: rgb(255, 189, 173);
+            border: dotted 3px  rgb(255, 136, 0);
+        }
+
+        #next{
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 1.1rem;
+            background-color: rgb(255, 189, 173);
+            border: dotted 3px  rgb(255, 136, 0);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="slider">
+        <a href="" id="jump">
+            <img id="img" src="" alt="" width="100%">
+        </a>
+        <button id ="prev">Prev</button>
+        <button id ="next">Next</button>
+        <p id="number"></p>
+    </div>
+
+    <script>
+        const images = [
+            'https://image.rakuten.co.jp/nishida-store/cabinet/06059528/imgrc0092777391.jpg',
+            'https://image.rakuten.co.jp/nishida-store/cabinet/06059528/brand1.jpg',
+            'https://image.rakuten.co.jp/nishida-store/cabinet/06059528/imgrc0091856073.jpg',
+            'https://image.rakuten.co.jp/nishida-store/cabinet/06059528/imgrc0091832780.jpg',
+            'https://image.rakuten.co.jp/nishida-store/cabinet/06059528/inventory_processing.jpg',
+        ];
+
+        const jumps =[
+            'https://item.rakuten.co.jp/nishida-store/110311/',
+            'https://item.rakuten.co.jp/nishida-store/110050/',
+            'https://item.rakuten.co.jp/nishida-store/110023/',
+            'https://item.rakuten.co.jp/nishida-store/110025/',
+            'https://item.rakuten.co.jp/nishida-store/110164/',
+        ];
+
+        const img = document.getElementById('img');
+        const jump = document.getElementById('jump');
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+        const number = document.getElementById('number');
+
+        let index = 0;
+        img.src= images[index];
+        jump.href = jumps[index] ; 
+
+        let molecule = 1;
+        number.innerText = + molecule + '/' + images.length;
+
+        next.addEventListener('click',function () {
+            if (index === 0) {
+                img.src = images[1];
+                jump.href = jumps[1]; 
+                number.innerText = molecule+1 + '/' + images.length;              
+                index++;
+                molecule++                
+            }else if (index < images.length-1) {
+                img.src= images[index + 1];
+                jump.href = jumps[index + 1];
+                number.innerText = molecule+1 + '/' + images.length;                       
+                index++; 
+                molecule++       
+            }           
+        });
+
+        prev.addEventListener('click',function () {
+            if (index === 0) {
+                img.src = images[0];
+                jump.href = jumps[0];
+                number.innerText = (index+1) + '/' + images.length;                
+            }else if (index < images.length) {
+                img.src = images[index-1];
+                jump.href = jumps[index-1];
+                number.innerText = index + '/' + images.length;                       
+                index--;
+                molecule--;               
+            }           
+        });
+
+        
+
+
+
+    </script>
+    
+</body>
+</html>

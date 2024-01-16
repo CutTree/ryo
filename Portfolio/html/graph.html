@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>graph</title>
+
+    <style>
+
+        body{
+            margin: 0;
+        }
+
+        #canvas{
+            margin: 0;
+        }
+
+        #graph39{
+            margin-left: 1vw;
+            border-left:solid 1vw  rgb(0,255,0);
+        }
+
+        #graph51{
+            margin-left: 1vw;
+            border-left:solid 1vw  rgb(0,255,255);
+        }
+
+
+        #graph87{
+            margin-left: 1vw;
+            border-left:solid 1vw  rgb(255,0,255);
+        }
+
+        .graph{
+            position: absolute;
+            top: 10vh; 
+        }
+        
+
+    </style>
+</head>
+<body>
+    <div class="graph">
+        <p id="graph39"> </p>
+        <p id="graph51"> </p>
+        <p id="graph87"> </p>    
+    </div>
+
+    <canvas id="canvas"></canvas>
+
+
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d');
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+
+        let x = innerWidth/10;
+        let x2 = innerWidth/10 * 3;
+        let x3 = innerWidth/10 * 5;
+        let y = innerHeight;
+        let dy = -1;
+        let y2 = innerHeight;
+        let dy2 = -1;
+        let y3 = innerHeight;
+        let dy3 = -1;
+
+        let count = 0;
+
+        let p39 = document.getElementById("graph39");
+        let p51 = document.getElementById("graph51");
+        let p87 = document.getElementById("graph87");
+
+        function graph39() {
+            ctx.beginPath();
+            ctx.rect(x,y,innerWidth/10,innerHeight);
+            ctx.fillStyle = 'rgb(0,255,0)';
+            ctx.fill();
+            ctx.closePath();
+
+
+            if (y + dy > innerHeight-(innerHeight/100 * 39) ) {
+                y += dy;
+            }
+        }
+
+        function graph51() {
+            ctx.beginPath();
+            ctx.rect(x2,y2,innerWidth/10,innerHeight);
+            ctx.fillStyle = 'rgb(0,255,255)';
+            ctx.fill();
+            ctx.closePath();
+
+            if (y2 + dy2 > innerHeight-(innerHeight/100 * 51) ) {                
+                y2 += dy2;
+            }            
+        }
+
+        function graph87() {
+            ctx.beginPath();
+            ctx.rect(x3,y3,innerWidth/10,innerHeight);
+            ctx.fillStyle = 'rgb(255,0,255)';
+            ctx.fill();
+            ctx.closePath();
+
+            if (y3 + dy3 > innerHeight-(innerHeight/100 * 87) ) {                
+                y3 += dy3;
+            }            
+        }
+
+        function countUP39() {
+            setInterval(()=>{
+                if (y + dy > innerHeight-(innerHeight/100 * 39) ) {
+                    p39.innerText = Math.floor(Math.random()*100) + '%';
+                    count++;                    
+                }else if (y2 + dy2 < innerHeight-(innerHeight/100 * 39) ) {
+                    p39.innerText = 39 + '%';
+                }
+            },10)           
+        }
+
+        function countUP51() {
+            setInterval(()=>{
+                if (y2 + dy2 > innerHeight-(innerHeight/100 * 51) ) {
+                    p51.innerText = Math.floor(Math.random()*100) + '%';
+                    count++;                    
+                }else if (y2 + dy2 < innerHeight-(innerHeight/100 * 51) ) {
+                    p51.innerText = 51 + '%';
+                }
+            },10)           
+        }
+
+
+        function countUP87() {
+            setInterval(()=>{
+                if (y3 + dy3 > innerHeight-(innerHeight/100 * 87) ) {
+                    p87.innerText = Math.floor(Math.random()*100) + '%';
+                    count++;                    
+                }else if (y3 + dy3 < innerHeight-(innerHeight/100 * 87) ) {
+                    p87.innerText = 87 + '%';
+                }
+            },10)           
+        }
+
+
+
+/*        let arcWidth = innerWidth/2;
+        let arcHeight = innerHeight/2;
+        let radius = innerHeight/5;
+
+        function graph() {
+            ctx.beginPath();
+            ctx.arc(arcWidth,arcHeight,radius,0,Math.PI); 
+            ctx.fillStyle = 'rgb(185, 0, 0)';
+            ctx.fill();
+            ctx.closePath(); 
+            ctx.beginPath();
+            ctx.arc(arcWidth,arcHeight,radius,0,Math.PI,true); 
+            ctx.fillStyle = 'rgb(185, 100, 100)';
+            ctx.fill();
+            ctx.closePath();            
+           
+        }
+*/
+
+        let barGraph = setInterval(()=>{
+            graph39();
+            graph51();
+            graph87();
+        },1)
+
+        countUP39();
+        countUP51();
+        countUP87();
+
+/*       var num = 0;
+        var tgt = 500;
+        var speed = 10;
+        setInterval(function(){
+            if(num <= tgt){
+            	document.getElementById("cup").innerText = num;
+            	num++;
+                }
+            },speed);
+*/
+
+
+
+    </script>
+    
+</body>
+</html>

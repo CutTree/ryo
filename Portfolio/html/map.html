@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>map</title>
+    <style>
+        .map{
+            margin: 0 auto;
+            width: 90vw;
+            height: 70vh;
+        }   
+
+        .text_box{
+            float: right;
+            padding-bottom: 2vh;
+        }
+    </style>
+</head>
+<body>
+    <div id="TextBox" class="text_box"> 
+        <input type="text" placeholder="住所を入力">
+        <input type="button" value="決定">
+    </div>
+
+    <div id="map" class="map"></div>
+
+
+    <script>
+        function initMap() {
+            var opts = {
+                zoom: 15,
+                center: new google.maps.LatLng(35.6807527,139.7670716)
+            };
+        var map = new google.maps.Map(document.getElementById("map"), opts);
+        }
+        console.log(MapHeight);
+    </script>
+        <script async defer 
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAflKauZnMbkYY3gEhMyHkmydEzcKDMiyI&callback=initMap"></script>
+</body>
+</html>

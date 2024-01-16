@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        クリックしてスクロール
+    </title>
+    <style>
+        .btn_top{
+            position:fixed;
+            bottom: 5%;
+            right: 3%;
+            text-align: center;
+            padding: 0 1%;
+            background-color: rgb(0, 0, 0);
+            color: oldlace;
+            opacity: 0.8;
+        }
+
+        .caption1{
+            height: 100vh;
+            width: 100vw;
+            background-color: coral;
+        }
+
+        .caption2{
+            height: 100vh;
+            width: 100vw;
+            background-color:darkgrey;
+        }
+
+        .caption3{
+            height: 100vh;
+            width: 100vw;
+            background-color:mediumpurple;
+        }
+
+        .midasi{
+            text-align: center;
+            padding: 5%;
+            margin: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="btn_top" id="btn_top">▲<br>上へ</div>
+    </nav>
+    <main>
+        <caption>
+            <div class="caption1" id="first_p">
+                <h1 class="midasi">AAA</h1>               
+            </div>
+            <div class="caption2">
+                <h1 class="midasi">BBB</h1>                
+            </div>
+            <div class="caption3">
+                <h1 class="midasi">CCC</h1>                
+            </div>
+        </caption>
+    </main>
+
+    <script>
+        document.getElementById('btn_top').addEventListener('click',function () {
+            const OffSetTop = document.getElementById('first_p').getBoundingClientRect;
+
+            scrollTo({
+                top: OffSetTop,
+                behavior : 'smooth'
+            })
+            //console.log(OffSetTop)；
+            
+        })
+    </script>
+    
+</body>
+</html>

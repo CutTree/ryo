@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)file:///Users/mirise-inc/Desktop/Untitled-1.html -->
+<html lang="ja">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://shopping.c.yimg.jp/lib/qcy/milink_logo_square.jpg">
+    <link rel="apple-touch-icon" href="https://shopping.c.yimg.jp/lib/qcy/milink_logo_square.jpg" sizes="180x180">
+    <title>MiLink Yahoo!ショップ 特設ページ
+    </title>
+
+    <style>   
+    /*body GIF入れるパターン*/ 
+        body{
+            margin: 0;
+            margin: 0 auto;
+            min-height: 100vh;
+            /*ゾウのマーク入れる場合
+            background-image: url(https://shopping.c.yimg.jp/lib/qcy/bg_02.png);
+            background-repeat: repeat;
+            */
+            background-color: #f9f9f9;
+        }
+       
+
+        /*看板*/
+        .store_board{
+            width:100vw;
+            height: 81px;
+            margin: 0;
+            position: fixed;
+            top: 0;
+            left: 0;/*左にしたいときは「left」に
+            単位をpxにしてもOK！自身で調整してください*/
+            text-decoration: none;
+            color: black;
+            z-index: 1 ;
+            background-color: rgb(255, 255, 255,0);
+            
+        }
+
+        /*1250px以下は看板が追いかけない*/
+        @media screen and (max-width:1250px/*境目を指定可能*/){
+            .store_board{
+                width:100vw;
+                height: 81px;
+                margin: 0;
+                position: relative;
+                top: 0;
+                left: 0;
+                text-decoration: none;
+                color: black;
+                z-index: 1 ;
+                background-color: rgb(255, 255, 255,0);           
+            }
+        }
+
+        /*メニューボタン*/
+        .menu_btn{
+            position: fixed;
+            top: 1vh;
+            right: 1vw;/*左にしたいときは「left」に
+            単位をpxにしてもOK！自身で調整してください*/
+            text-decoration: none;
+            z-index: 2;
+            color: black;
+        }
+
+        /*ボタン外側※レイアウトによってpositionや形状は適宜変更してください*/
+        .openbtn1{
+            position: relative;/*ボタン内側の基点となるためrelativeを指定*/
+            background:#db904d;
+            cursor: pointer;
+            width: 50px;
+            height:50px;
+            border-radius: 5px;
+        }
+
+        /*ボタン内側*/
+        .openbtn1 span{
+            display: inline-block;
+            transition: all .4s;/*アニメーションの設定*/
+            position: absolute;
+            left: 14px;
+            height: 3px;
+            border-radius: 2px;
+            background: #fff;
+            width: 45%;
+        }
+
+        .openbtn1 span:nth-of-type(1) {
+            top:15px; 
+        }
+
+        .openbtn1 span:nth-of-type(2) {
+            top:23px;
+        }
+
+        .openbtn1 span:nth-of-type(3) {
+            top:31px;
+        }
+
+        /*activeクラスが付与されると線が回転して×に*/
+
+        .openbtn1.active span:nth-of-type(1) {
+            top: 18px;
+            left: 18px;
+            transform: translateY(6px) rotate(-45deg);
+            width: 30%;
+        }
+
+        .openbtn1.active span:nth-of-type(2) {
+            opacity: 0;/*真ん中の線は透過*/
+        }
+
+        .openbtn1.active span:nth-of-type(3){
+            top: 30px;
+            left: 18px;
+            transform: translateY(-6px) rotate(45deg);
+            width: 30%;
+        }
+
+
+        /*ボタンを押す前　　上に隠してある状態です
+        */
+        .close{
+            width: 100%;
+            margin: 0;
+            background-color: rgb(255, 163, 34);
+            position: fixed;
+            top: -60vh;/*ここで高さを調整できる*/
+            transition: 1s;;/*ここでバーの出てくる速さを調整できる*/
+            color: black;
+            z-index: 1;
+        }
+
+        .close ul{
+            height: 41vh;
+            list-style: none;
+        }
+
+        .close li{
+            padding-top: 1vh;
+            text-align: center;
+            padding-left: 0;
+            padding-bottom: 1vh;
+        }
+
+        .close a{
+            text-decoration: none;
+            color: black;
+            border-bottom: solid 1px;
+        }
+
+
+
+        /*ボタンを押した後の状態　　closeタグの色やサイズを変えたら同じようにコードを書く
+        */
+
+        .open{
+            width: 100%;
+            margin: 0;
+            background-color: rgb(255, 163, 34);
+            position: fixed;
+            top: 0;
+            transition: 1s;
+            color: black;
+            z-index: 1;
+        }
+
+        .open ul{
+            height: 41vh;
+            list-style: none;
+        }
+
+        .open li{
+            text-align: center;
+            padding-top: 1vh;
+            padding-left: 0;
+            padding-bottom: 1vh;
+        }
+
+        .open a{
+            text-decoration: none;
+            color: black;
+            border-bottom: solid 1px;
+        }
+
+
+
+        /**上に戻るボタン
+        */
+        .top_up_btn{
+            background-color: gray;
+            color: white;
+            opacity: 0.8;
+            position: fixed;
+            bottom: 1vh;
+            right: 1vw;/*左にしたいときは「left」に
+            単位をpxにしてもOK！自身で調整してください*/
+            padding: 0.5%;
+            text-decoration: none;
+            text-align: center;
+            z-index: 1;
+
+        }
+
+        /**製品の選び方
+        */
+
+        .genre{
+            width: 100%;
+            max-width: 1024px;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .genre ul{
+            width: 98%;
+            display: flex;
+            text-align: center;
+            padding: 0;
+        }
+
+        .genre li{
+            width: 100%;
+            list-style: none;
+            padding-left: 0;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .genre img{
+            border-radius: 50%;
+        }
+
+        .genre img:hover{
+            border-radius: 0%;
+            transition: 500ms;
+            opacity: 0.8;
+        }
+
+        .qcy_contents{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-width: 1024px;
+            margin: 0 auto;
+            text-align: center;
+            color: black;
+            margin-top: 5%;
+            margin-bottom: 5%;
+		}
+
+
+
+        .qcy_contents:before,
+		.qcy_contents:after {
+			content: "";
+			flex-grow: 1;
+			height: 3px; /* 線の太さ */
+			background: rgb(0, 0, 0); /* 線の色 */
+            margin: 0 auto;
+            text-align: center;           
+		}
+
+        .qcy_contents::before{
+            margin-right: 10%;
+        }
+
+        .qcy_contents:after{
+            margin-left: 10%;
+        }
+
+        /*フワッとさせるパーツ
+        */
+
+        .js_animation{
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(160px);
+            transition: all 1.8s;
+            z-index: 0;
+        }
+
+        .js_animation.show{
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0px);
+        }
+
+        /*クーポン
+        */
+
+        .qcy_coupon{
+			position: relative;
+			overflow: hidden;
+			width: 96%;
+            max-width: 1024px;
+			margin: 0 auto;
+		}
+
+		.qcy_coupon ul{
+			list-style: none;
+			display: flex;
+			overflow: scroll;
+			padding: 0;	
+		}
+
+		.qcy_coupon li{
+			flex-shrink: 0;
+			width: 100%;
+			margin-right:-16%;
+		}
+
+        /*テーブル共通設定
+        */
+
+        .pickup_box{
+            width: 100%;
+            max-width: 1024px;
+            text-align: center;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 16px;
+        }
+
+        .pickup_box table{
+            border-collapse: separate;
+            border-spacing: 1rem;
+        }
+
+        .pickup_box td{
+            border: none ;
+            background-color: white;
+            /*box-shadow: 0px 13px 30px 0px rgb(0 0 0 / 73%);*/
+            box-shadow: 1px 10px 4px 3px rgba(55, 54, 61, 0.08);
+            border-radius: 3%;
+            padding: 1%;
+
+        }
+
+        .pickup_box img{
+            border-radius: 3%;
+        }
+
+                /*リスト共通設定
+        */
+
+        .pickup_list{
+			position: relative;
+			overflow: hidden;
+			width: 96%;
+            max-width: 1024px;
+			margin: 0 auto;
+		}
+
+		.pickup_list ul{
+			list-style: none;
+			display: flex;
+			overflow: scroll;
+			padding: 0;	
+		}
+
+		.pickup_list li{
+            border: none;
+            background-color: white;
+            box-shadow: 1px 1px 3px 1px rgb(17, 16, 40);
+			flex-shrink: 0;
+			width: 50%;
+            margin-left: 1rem;
+            border-radius: 3%;
+            padding: 1%;
+		}
+
+        .model_name{
+            text-align: center;
+            margin: 0 auto;
+            color: dimgray;
+            padding-bottom: 3%;
+            padding-top: 3%;
+        }
+
+        .model_price{
+            text-align: center;
+            margin: 0 auto;
+            color: black;
+            font-weight: bold;
+            padding-bottom: 3%;
+            padding-top: 3%;
+        }
+
+        .sale_price{
+            text-align: center;
+            margin: 0 auto;
+            color: tomato;
+            font-weight: bold;
+            padding-top: -6%;
+            padding-bottom: 3%;
+        }
+
+                /*MiLInkブランドコンセプト
+        */
+
+        .milink_list{
+			width: 100%;
+            max-width: 1024px;
+			margin: 0 auto;
+		}
+
+		.milink_list ul{
+			list-style: none;
+			display: flex;
+			padding: 0;	
+		}
+
+        @media screen and (max-width:1024px) {
+            .milink_list ul{
+			list-style: none;
+			display:inline;
+			padding: 0;	
+		    }           
+        }
+
+		.milink_list li{
+            border: none;
+            background-color: white;
+            box-shadow: 1px 1px 3px 1px rgb(17, 16, 40);
+			flex-shrink: 0;
+			width: 45%;
+            margin-left: 1rem;
+            border-radius: 3%;
+            margin: 0 auto;
+            margin-bottom: 10%;
+            padding: 1%;
+		}
+
+        @media screen and (max-width:1024px) {
+            .milink_list li{
+                border: none;
+                background-color: white;
+                box-shadow: 1px 1px 3px 1px rgb(17, 16, 40);
+                flex-shrink: 0;
+                width: 90%;
+                margin-left: 1rem;
+                border-radius: 3%;
+                margin: 0 auto;
+                padding: 1%;
+		    } 
+            .milink_list li:last-child{
+                margin-bottom: 10%;
+            }
+        }
+
+
+
+    </style>
+</head>
+
+
+<caption></caption>
+
+<body>
+
+    <div class="store_board" id="store_top">
+        <a href="https://shopping.geocities.jp/qcy/">
+            <img src="https://shopping.c.yimg.jp/lib/qcy/logo_yahoo_top.png" height="75px" alt="">
+        </a>
+    </div>
+
+
+    <div id="menu_btn" class="menu_btn" onclick="Btnfunc">
+        <div id="hamburgerMenu" class="openbtn1"><span></span><span></span><span></span></div>
+        <!--Menu-->
+        
+    </div>
+
+    <div id="list" class="close">
+        <ul>
+            <li>
+                <a href="https://store.shopping.yahoo.co.jp/qcy/b4b0c1b4a5.html">ヘッドホン・イヤホン
+                </a>               
+            </li>
+            <li>
+                <a href="https://store.shopping.yahoo.co.jp/qcy/a4bda4cec2.html">美容・健康家電</a>               
+            </li>
+            <li>
+                <a href="https://store.shopping.yahoo.co.jp/qcy/bcfecad5b5.html">PC・スマホ・通信</a>              
+            </li>
+            <li>
+                <a href="https://store.shopping.yahoo.co.jp/qcy/c0b8b3e8b2.html">生活家電</a>              
+            </li>
+            <li>
+                <a href="https://store.shopping.yahoo.co.jp/qcy/c6fccdd1c9.html">日用品雑貨</a>              
+            </li>
+            <li>
+                <a href="https://paypaymall.yahoo.co.jp/store/qcy/info/">会社概要</a>              
+            </li>
+            <li>
+                <a href="https://paypaymall.yahoo.co.jp/store/qcy/top/">MiLink Yahoo!ショップ トップ</a>              
+            </li>
+        </ul>
+    </div>
+
+    <div id="top_up_btn" class="top_up_btn" onclick="TargetTOP">
+       ▲<br>TOPへ       
+    </div>
+
+    <div class="js_animation">
+        <h2 class="qcy_contents">製品の選び方</h2>
+    </div>
+    <div class = "genre">
+        <ul>
+            <li>
+                <a href="#sale_price" target="_top" rel="noopener noreferrer">
+                    <img src="https://shopping.c.yimg.jp/lib/qcy/sale.jpg" alt="" width="98%">
+                </a>
+            </li>
+            <li>
+                <a href="#new_model" target="_top" rel="noopener noreferrer">
+                    <img src="https://shopping.c.yimg.jp/lib/qcy/new.jpg" alt="" width="98%">
+                </a>
+            </li>
+            <li>
+                <a href="#beginner" target="_top" rel="noopener noreferrer">
+                    <img src="https://shopping.c.yimg.jp/lib/qcy/beginner.jpg" alt="" width="98%">
+                </a>
+            </li>
+        </ul>
+        
+        <ul>
+            <li>
+                SALE情報
+            </li>
+            <li>
+                最新機種
+            </li>
+            <li>
+                初めての方に<br>おすすめ
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <a href="#music" target="_top" rel="noopener noreferrer">
+                    <img src="https://shopping.c.yimg.jp/lib/qcy/music.jpg" alt="" width="98%">
+                </a>
+            </li>
+            <li>
+                <a href="#sports" target="_top" rel="noopener noreferrer">
+                    <img src="https://shopping.c.yimg.jp/lib/qcy/earpods_sports.jpg" alt="" width="98%">
+                </a>
+            </li>
+            <li>
+                <a href="#online" target="_top" rel="noopener noreferrer">
+                    <img src="https://shopping.c.yimg.jp/lib/qcy/online.jpg" alt="" width="98%">
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                音質重視の方に<br>おすすめ
+            </li>
+            <li>
+                スポーツに<br>おすすめ
+            </li>
+            <li>
+                通話/WEB会議に<br>おすすめ
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <a href="#game" target="_top" rel="noopener noreferrer">
+                    <img src="https://shopping.c.yimg.jp/lib/qcy/movie.jpg" alt="" width="98%">
+                </a>
+            </li>
+            <li>
+                <a href="#gadget" target="_top" rel="noopener noreferrer">
+                    <img src="https://shopping.c.yimg.jp/lib/qcy/gadget_item.jpg" alt="" width="98%">
+                </a>
+            </li>
+            <li>
+                <a href="#infly" target="_top" rel="noopener noreferrer">
+                    <img src="https://shopping.c.yimg.jp/lib/qcy/mouth_wash.jpg" alt="" width="98%">
+                </a>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                動画/ゲームに<br>おすすめ
+            </li>
+            <li>
+                小物/周辺機器
+            </li>
+            <li>
+                inFly<br>電動歯ブラシ
+            </li>
+        </ul>
+    </div>
+
+
+<!-- クーポン -->
+
+    <div class="js_animation">
+        <h2 class="qcy_contents">配布中のクーポン</h2>
+    </div>
+    
+    <table class="qcy_coupon">
+        <tr>
+            <td>
+                <a href="https://shopping.yahoo.co.jp/coupon/kaden/Yzc1NjNlYmVlOWZhMmNmZTZhNDQyOWEwMjcw" target="_top" rel="noopener noreferrer">
+                    <img src="https://shopping.c.yimg.jp/lib/qcy/coupon3k300.png" alt="SALE画像" width="100%">
+                </a>
+            </td>
+            <td>
+                <a href="https://shopping.yahoo.co.jp/coupon/kaden/ZTIzMmI0OWExYmY1ODYyYTgyYTg5MzVkMmNm" target="_top" rel="noopener noreferrer">
+                    <img src="https://shopping.c.yimg.jp/lib/qcy/coupon5k500.png" alt="SALE画像" width="100%">
+                </a>
+            </td>
+            <td>
+                <a href="https://shopping.yahoo.co.jp/coupon/kaden/Mzc0YjdiM2ViNGFkNjcwYThhN2YxMjdlMGMz" target="_top" rel="noopener noreferrer">
+                    <img src="https://shopping.c.yimg.jp/lib/qcy/coupon10k1000.png" alt="SALE画像" width="100%">
+                </a>
+            </td>
+        </tr>
+    </table>
+    
+    <!--   <div class="qcy_coupon">
+        <ul>
+            <ul>
+                <li>
+                    <a href="https://shopping.yahoo.co.jp/coupon/kaden/YjgwMmM5YWQ5YjM4MzVmMWFlOTg1YTExOWFl" target="_top" rel="noopener noreferrer">
+                        <img src="https://shopping.c.yimg.jp/lib/qcy/toppage_coupon03_342_180.jpg" alt="SALE画像" width="80%">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://shopping.yahoo.co.jp/coupon/kaden/YjgwMmM5YWQ5YjM4MzVmMWFlOTg1YTExOWFl" target="_top" rel="noopener noreferrer">
+                        <img src="https://shopping.c.yimg.jp/lib/qcy/toppage_coupon02_342_180.jpg" alt="SALE画像" width="80%">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://shopping.yahoo.co.jp/coupon/kaden/YjgwMmM5YWQ5YjM4MzVmMWFlOTg1YTExOWFl" target="_top" rel="noopener noreferrer">
+                        <img src="https://shopping.c.yimg.jp/lib/qcy/toppage_coupon01_342_180.jpg" alt="SALE画像" width="80%">
+                    </a>
+                </li>
+            </ul>
+        </ul>
+    </div>-->
+
+
+<!-- SALE -->
+
+    <div id="sale_price"></div>
+
+    <div class="js_animation">
+        <h2 class="qcy_contents">SALE</h2>
+    </div>
+
+    <div  class="pickup_box">
+        <table>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t13.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t13_i_20230123152352" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">QCY-T13<br>8連続再生
+                    </p>
+                    <del>
+                        <p class="model_price">価格 5,390円
+                        </p>
+                    </del>
+                    <p class="sale_price">
+                        SALE価格 4,980円
+                        <br>(8％OFF)
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-ht01c.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-ht01c_i_20230123151415" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">QCY-HT01C<br>ANC搭載
+                    </p>
+                    <del>
+                        <p class="model_price">価格 9,900円
+                        </p>
+                    </del>
+                    <p class="sale_price">
+                        SALE価格 7,920円
+                        <br>(20%OFF)
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t9.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t9_i_20230123151326" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">QCY-9<br>落下防止フック
+                    </p>
+                    <del>
+                        <p class="model_price">価格 3,980円
+                        </p>
+                    </del>
+                    <p class="sale_price">
+                        SALE価格 2,980円
+                        <br>(25%OFF)
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/ml-tb01.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_ml-tb01_i_20221213163004" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">MiLink-TB01<br>5つのモード搭載
+                    </p>                   
+                    <del>
+                        <p class="model_price">価格 4,980円
+                        </p>         
+                    </del>         
+                    <p class="sale_price">
+                        SALE価格 4,730円
+                        <br>(5%OFF)
+                    </p>
+                </td>
+            </tr>
+                 <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/infly-p60.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_infly-p60_i_20230120091058" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">inFly-P60<br>お得なセット
+                    </p>
+                    <del>
+                        <p class="model_price">価格 4,380円
+                        </p>
+                    </del>
+                    <p class="sale_price">
+                        SALE価格 4,160円
+                        <br>(5%OFF)
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-dc03.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-dc03" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">QCY-DC03<br>耐久性が高い
+                    </p>                 
+                    <del>
+                        <p class="model_price">価格 1,980円
+                        </p>         
+                    </del>         
+                    <p class="sale_price">
+                        SALE価格 1,780円
+                        <br>(10%OFF)
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+<!-- COUPON -->
+
+<div id="sale_price"></div>
+
+<div class="js_animation">
+    <h2 class="qcy_contents">COUPON</h2>
+</div>
+
+<div  class="pickup_box">
+    <table>
+        <tr>
+            <td>
+                <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-mini1.html" target="_top">
+                    <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-mini1_i_20230109132136" width="100%" alt="" />
+                </a>
+                <p class="model_name">QCY-T5<br>65ms低遅延
+                </p>
+                <del>
+                    <p class="model_price">価格 3,980円
+                    </p>
+                </del>
+                <p class="sale_price">
+                    クーポン利用時 2,980円
+                    <br>(1,000円OFF)
+                </p>
+            </td>
+            <td>
+                <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t3.html" target="_top">
+                    <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t3_i_20230104142228" width="100%" alt="" />
+                </a>
+                <p class="model_name">QCY-T3<br>音量調整ができる
+                </p>
+                <del>
+                    <p class="model_price">価格 5,980円
+                    </p>
+                </del>
+                <p class="sale_price">
+                    クーポン利用時 4,980円
+                    <br>(1,000円OFF)
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t11s.html" target="_top">
+                    <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t11s_i_20221128134236" width="100%" alt="" />
+                </a>
+                <p class="model_name">QCY-T11S<br>2つのドライバー搭載
+                </p>
+                <del>
+                    <p class="model_price">価格 6,980円
+                    </p>
+                </del>
+                <p class="sale_price">
+                    クーポン利用時 5,980円
+                    <br>(1,000円OFF)
+                </p>
+            </td>
+            <td>
+                <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t6a.html" target="_top">
+                    <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t6a_i_20221226142637" width="100%" alt="" />
+                </a>
+                <p class="model_name">QCY-T6<br>耳掛け式タイプ
+                </p>
+                <del>
+                    <p class="model_price">価格 4,380円
+                    </p>
+                </del>
+                <p class="sale_price">
+                    クーポン利用時 3,380円
+                    <br>(1,000円OFF)
+                </p>
+            </td>
+        </tr>
+    </table>
+</div>
+
+
+    <!-- 2022年最新モデル -->
+    <div id="new_model"></div>
+
+    <div class="js_animation">
+        <h2 class="qcy_contents">2023年最新モデル</h2>
+    </div>
+
+    <div  class="pickup_box">
+        <table>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-gtc.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-gtc_i_20230120171810" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">スマートウォッチ<br>QCY-GTC
+                    </p>
+                    <p class="model_price">価格 5,980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-h2.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-h2_i_20230106150446" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスヘッドホン<br>QCY-H2
+                    </p>
+                    <p class="model_price">価格 5,980円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t1cpro.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t1cpro_i_20221228144606" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T1CPro
+                    </p>
+                    <p class="model_price">価格 4,380円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-ailypods.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-ailypods_i_20221128134003" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-AilyPods
+                    </p>
+                    <p class="model_price">価格 5,980円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t18.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t18_i_20221128134039" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T18
+                    </p>
+                    <p class="model_price">価格 7,980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t17.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t17_i_20221128134102" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T17
+                    </p>
+                    <p class="model_price">価格 3,980円
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+    <!-- 初心者 -->
+
+    <div id="beginner"></div>
+    <div class="js_animation">
+        <h2 class="qcy_contents">はじめての方におすすめ</h2>
+    </div>
+
+    <div  class="pickup_box">
+        <table>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t17.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t17_i_20221128134102" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T17
+                    </p>
+                    <p class="model_price">価格 3,980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t13.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t13" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T13
+                    </p>
+                    <p class="model_price">価格 5,390円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t1cpro.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t1cpro_i_20221228144606" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T1CPro
+                    </p>
+                    <p class="model_price">価格 4,380円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t5.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t5_i_20221212120326" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T5
+                    </p>
+                    <p class="model_price">価格 3,980円
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+<!-- 音質重視 -->
+
+    <div id="music"></div>
+
+    <div class="js_animation">
+        <h2 class="qcy_contents">音楽好きにおすすめ</h2>
+    </div>
+
+    <div  class="pickup_box">
+        <table>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t18.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t18_i_20221128134039" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T18
+                    </p>
+                    <p class="model_price">価格 7,980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-ailypods.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-ailypods_i_20221128134003" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-AilyPods
+                    </p>
+                    <p class="model_price">価格 5,980円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t11s.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t11s_i_20221128134236" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T11S
+                    </p>
+                    <p class="model_price">価格 6,980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t13.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t13" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T13
+                    </p>
+                    <p class="model_price">価格 5,390円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-ht01c.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-ht01c_i_20221128134506" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-HT01C
+                    </p>
+                    <p class="model_price">価格 9,900円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t3.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t3_i_20230104142228" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T3
+                    </p>
+                    <p class="model_price">価格 5,980円
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+
+<!-- ランニング -->
+
+    <div id="sports"></div>
+
+    <div class="js_animation">
+        <h2 class="qcy_contents">スポーツにおすすめ</h2>
+    </div>
+
+    <div  class="pickup_box">
+        <table>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t9.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t9_i_20221207171104" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T9
+                    </p>
+                    <p class="model_price">価格 3,980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t17.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t17_i_20221128134102" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T17
+                    </p>
+                    <p class="model_price">価格 3,980円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t1.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t1_i_20221128134353" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T1
+                    </p>
+                    <p class="model_price">価格 3,980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-qy25plus.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-qy25plus_i_20221214133343" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-QY25Plus
+                    </p>
+                    <p class="model_price">価格 2,980円
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+<!-- WEB会議 -->
+
+    <div id="online"></div>
+    <div class="js_animation">
+        <h2 class="qcy_contents">通話におすすめ</h2>
+    </div>
+    <div  class="pickup_box">
+        <table>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-ailypods.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-ailypods_i_20221128134003" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-AilyPods
+                    </p>
+                    <p class="model_price">価格 5,980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t13.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t13" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T13
+                    </p>
+                    <p class="model_price">価格 5,390円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t16.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t16_i_20221128134131" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T16
+                    </p>
+                    <p class="model_price">価格 5,780円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t18.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t18_i_20221128134039" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T18
+                    </p>
+                    <p class="model_price">価格 7,980円
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+
+<!-- ゲーム -->
+
+    <div id="game"></div>
+    <div class="js_animation">
+        <h2 class="qcy_contents">ゲームにおすすめ</h2>
+    </div>
+
+    <div  class="pickup_box">
+        <table>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-g1.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-g1_i_20221128134531" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-G1
+                    </p>
+                    <p class="model_price">価格 6,980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t5.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t5_i_20221212120326" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T5
+                    </p>
+                    <p class="model_price">価格 3,980円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-ht03.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-ht03_i_20221128134330" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-HT03
+                    </p>
+                    <p class="model_price">価格 8,980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-t11s.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-t11s_i_20221128134236" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ワイヤレスイヤホン<br>QCY-T11S
+                    </p>
+                    <p class="model_price">価格 6,980円
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+    
+
+
+<!-- 小物 -->
+
+    <div id="gadget"></div>
+
+    <div class="js_animation">
+        <h2 class="qcy_contents">周辺機器</h2>
+    </div>
+
+    <div  class="pickup_box">
+        <table>
+            <tr>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/qcy-dc02/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-dc02" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">USB A to C<br>充電ケーブル
+                    </p>
+                    <p class="model_price">価格 980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/qcy-dc03.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-dc03" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">USB C to Lightning<br>充電ケーブル
+                    </p>
+                    <p class="model_price">価格 1,980円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/qcy-dc01/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-dc01" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">USB C to C<br>充電ケーブル
+                    </p>
+                    <p class="model_price">価格 1,580円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/qcy-pb10/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qcy-pb10" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">モバイルバッテリー<br>QCY-PB10
+                    </p>
+                    <p class="model_price">価格 2,980円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/sk0001/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_sk0001" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">JA-CA43<br>Wi-Fi室内カメラ
+                    </p>
+                    <p class="model_price">価格 7,980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/qi-m3/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_qi-m3" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">ペン型スキャナー<br>翻訳機
+                    </p>
+                    <p class="model_price">価格 8,580円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/deren-s001/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_deren-s001" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">6in1<br>マルチケーブル
+                    </p>
+                    <p class="model_price">価格 1,000円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/jsnb-1/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_jsnb-1" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">JSNB-1<br>縦置きスタンド
+                    </p>
+                    <p class="model_price">価格 3,980円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/jsnb-2/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_jsnb-2" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">JSNB-2<br>3台縦置きスタンド
+                    </p>
+                    <p class="model_price">価格 4,980円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/ml-st001/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_ml-st001" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">スマホスタンド<br>ST001
+                    </p>
+                    <p class="model_price">価格 2,380円
+                    </p>
+                </td>
+            </tr>
+         </table>
+    </div>
+
+
+<!-- 電動歯ブラシ -->
+
+    <div id="infly"></div>
+    <div class="js_animation">
+        <h2 class="qcy_contents">電動歯ブラシ</h2>
+    </div>
+
+    <div  class="pickup_box">
+        <table>
+            <tr>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/if-pt02-st03/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_if-pt02-st03" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">infly PT02<br>電動歯ブラシ
+                    </p>
+                    <p class="model_price">価格 5,390円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/if-pt02rb03/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_if-pt02rb03" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">infly PT02<br>専用替え歯ブラシ
+                    </p>
+                    <p class="model_price">価格 1,980円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/infly-t04b/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_infly-t04b" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">infly T04B<br>電動歯ブラシ
+                    </p>
+                    <p class="model_price">価格 5,390円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/infly-t04b-rb03" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_infly-t04b-rb03" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">infly T04B<br>専用替え歯ブラシ
+                    </p>
+                    <p class="model_price">価格 1,980円
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/if-p60-st3/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_if-p60-st3" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">infly P60<br>電動歯ブラシ
+                    </p>
+                    <p class="model_price">価格 3,580円
+                    </p>
+                </td>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/if-p60rb03/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_if-p60rb03" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">infly P60<br>専用替え歯ブラシ
+                    </p>
+                    <p class="model_price">価格 1,780円
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+ 
+     <!-- 電動歯ブラシセット -->
+
+    <div class="js_animation">
+        <h2 class="qcy_contents">電動歯ブラシセット</h2>
+    </div>
+
+    <div  class="pickup_box">
+        <table>
+            <tr>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/infly-p60/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_infly-p60" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">infly P60<br>電動歯ブラシ3本セット
+                    </p>
+                    <p class="model_price">価格 4,380円
+                    </p>
+                    <p class="sale_price">
+                        個別購入より
+                        <br>980円お得
+                    </p>
+                </td>
+                <td>
+                    <a href="https://store.shopping.yahoo.co.jp/qcy/if-p60-st06.html" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_if-p60-st06_i_20221019163023" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">infly P60<br>電動歯ブラシ6本セット
+                    </p>
+                    <p class="model_price">価格 4,980円
+                    </p>
+                    <p class="sale_price">
+                        個別購入より
+                        <br>2,160円お得
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/if-p60-st09/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_if-p60-st09" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">infly P60<br>電動歯ブラシ9本セット
+                    </p>
+                    <p class="model_price">価格 5,480円
+                    </p>
+                    <p class="sale_price">
+                        個別購入より
+                        <br>3,440円お得
+                    </p>
+                </td>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/if-pt02/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_if-pt02" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">infly PT02<br>電動歯ブラシ3本セット
+                    </p>
+                    <p class="model_price">価格 5,980円
+                    </p>
+                    <p class="sale_price">
+                        個別購入より
+                        <br>1,390円お得
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/if-pt02-st06/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_if-pt02-st06" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">infly PT02<br>電動歯ブラシ6本セット
+                    </p>
+                    <p class="model_price">価格 6,480円
+                    </p>
+                    <p class="sale_price">
+                        個別購入より
+                        <br>2,870円お得
+                    </p>
+                </td>
+                <td>
+                    <a href="https://paypaymall.yahoo.co.jp/store/qcy/item/if-pt02-st09/" target="_top">
+                        <img src="https://item-shopping.c.yimg.jp/i/n/qcy_if-pt02-st09" width="100%" alt="" />
+                    </a>
+                    <p class="model_name">infly PT02<br>電動歯ブラシ9本セット
+                    </p>
+                    <p class="model_price">価格 6,980円
+                    </p>
+                    <p class="sale_price">
+                        個別購入より
+                        <br>4,350円お得
+                    </p>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- ブランドミッション -->
+
+    <div class="js_animation">
+        <h2 class="qcy_contents">ブランドミッション</h2>
+        </div>
+    
+    <div  class="milink_list">
+
+        <ul>
+            <li>
+                <img src="https://shopping.c.yimg.jp/lib/qcy/brandv1.jpg" width="100%">
+            </li>
+            <li>
+                <img src="https://shopping.c.yimg.jp/lib/qcy/hosyoor.jpg" width="100%">                  
+            </li>
+        </ul>
+    </div>
+
+
+<!--JavaScriptはHTML/CSSの下にくるようにしてください-->
+
+<script>
+    /*到達したら要素を表示させる */
+    function showElementAnimation() {
+
+        var element = document.getElementsByClassName('js_animation');
+        if(!element) return; // 要素がなかったら処理をキャンセル
+
+        var showTiming = window.innerHeight > 768 ? 200 : 40; // 要素が出てくるタイミングはここで調整
+        var scrollY = window.pageYOffset;
+        var windowH = window.innerHeight;
+
+        for(var i=0; i < element.length;i++) { 
+            var elemClientRect = element[i].getBoundingClientRect(); 
+            var elemY = scrollY + elemClientRect.top; 
+                if(scrollY + windowH - showTiming > elemY) {
+                    element[i].classList.add('show');
+                    } 
+                else if(scrollY + windowH < elemY) {
+            // 上にスクロールして再度非表示にする場合はこちらを記述
+            element[i].classList.remove('show');
+                    }
+        }
+    }
+    showElementAnimation();
+    window.addEventListener('scroll', showElementAnimation);
+</script>
+
+<!--　クリックするとスクロールボタン　-->
+<script>
+    const TargetTOP = document.getElementById('top_up_btn');
+    const TargetTOPHeight = TargetTOP.getBoundingClientRect();
+
+    TargetTOP.addEventListener('click',()=>{
+        
+        window.scrollTo({
+            top: TargetTOPHeight,
+            behavior : 'smooth'
+        })
+    })
+</script>
+
+<!--　ジャンルのスクロール　-->
+<script>
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault()
+
+            const targetGenre = document.querySelector(link.hash) 
+            //const yohaku = -100 //100px引く場合
+            const yohaku　= window.innerHeight * 0.1 //画面の高さに対して１０％
+            const targetGenreOffSetTop = window.pageYOffset + targetGenre.getBoundingClientRect().top - yohaku
+            //console.log(e)
+
+            window.scrollTo({
+                top: targetGenreOffSetTop,
+                behavior: 'smooth'
+            })
+        })
+    } )
+</script>
+
+
+<!--　メニューボタン　-->
+<script>
+    document.getElementById('menu_btn').addEventListener('click',function () {
+        document.getElementById('hamburgerMenu').classList.toggle('active');
+        document.getElementById('list').classList.toggle('open');     
+    });
+    //console.log(document.getElementById('menu_btn').innerText)
+</script>
+<!--ここまでJavaScript-->
+    
+
+
+</body>
+</html>

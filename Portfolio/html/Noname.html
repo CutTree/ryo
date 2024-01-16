@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body{
+            max-width: 1024px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        ul{
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            padding-left: 0;
+            width: 100%;
+            background-color: rgb(137, 61, 61);
+            opacity: 0.9;
+        }
+
+        li{
+            display: flex;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+            border-left: solid 1px rgb(255, 255, 255);
+            border-bottom: solid 1px rgb(255, 255, 255);
+            padding: 10px 0;
+            text-align: center;
+            width: calc(100%/3) /*50%*/ ;
+            justify-content: center;
+            color: white;
+        }
+
+        li:hover{
+            background-color: rgb(72, 32, 32);
+            color: white;
+            transition: 0.8s;
+            opacity: 0.8;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <ul id="ktgItemList">
+        <li>
+            <div>
+                img_01
+            </div>
+        </li>
+        <li>
+            <div>
+                img_02
+            </div>
+        </li>
+        <li>
+            <div>
+                img_03
+            </div>
+        </li>
+        <li>
+            <div>
+                img_04
+            </div>
+        </li>
+        <li>
+            <div>
+                img_05
+            </div>
+        </li>
+        <li>
+            <div>
+                img_06
+            </div>
+        </li>
+        <li>
+            <div>
+                img_07
+            </div>
+        </li>
+        <li>
+            <div>
+                img_08
+            </div>
+        </li>
+        <li>
+            <div>
+                img_09
+            </div>
+        </li>
+    </ul>
+
+    <div id="KtgImg" width="100%">
+        img_01
+    </div>
+
+    <script>
+
+        const KtgText =['img_01',
+                        'img_02',
+                        'img_03',
+                        'img_04',
+                        'img_05',
+                        'img_06',
+                        'img_07',
+                        'img_08',
+                        'img_09'
+                    ];
+
+        const KTGbgColor = ['rgb(255, 205, 255)',
+                            'rgb(205, 255, 255)',
+                            'rgb(255, 255, 205)',
+                            'rgb(255, 205, 25)',
+                            'rgb(25, 205, 255)',
+                            'rgb(255, 25, 255)',
+                            'rgb(25, 25, 255)',
+                            'rgb(255, 25, 25)',
+                            'rgb(55, 205, 25)'
+                    ];
+        
+        const ktgItemList = document.getElementById('ktgItemList').querySelectorAll('li');
+        KTGcount = 0;
+        const KtgImg = document.getElementById('KtgImg');
+        KtgImg.style.backgroundColor = 'rgb(255, 205, 255)';
+        KtgImg.style.height = '30vh';
+
+        for (let i = 0; KTGcount < ktgItemList.length; i++) {
+            ktgItemList[i].addEventListener('click',function () {
+                KtgImg.innerText = KtgText[i];    
+                KtgImg.style.backgroundColor = KTGbgColor[i] ;
+        })
+        KTGcount++;           
+        }
+    </script>
+</body>
+</html>
