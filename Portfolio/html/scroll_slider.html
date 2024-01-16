@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>スクロールスライダー</title>
+
+    <style>
+        body{
+            margin: 0;
+        }
+
+        #container{
+            position: relative;
+            overflow: hidden;
+        }
+
+        #slide{
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding-left: 0;
+        }
+
+        .item_box{
+            flex-shrink: 0;
+            width: 100%; 
+        }
+
+        #button_box{
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        #prev{
+            border: dotted 2px rgb(0, 153, 255);
+            font-family:Arial, Helvetica, sans-serif;
+            font-size: 1rem;
+        }
+
+        #next{
+            border: dotted 2px rgb(0, 153, 255);
+            font-family:Arial, Helvetica, sans-serif;
+            font-size: 1rem;
+
+        }
+
+        #count{
+            margin: 0;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <ul id="slide">
+            <li class="item_box">
+                <a href="">
+                    <img src="https://image.rakuten.co.jp/nishida-store/cabinet/06059528/imgrc0092777391.jpg" width="100%" alt="">
+                </a>
+            </li>
+            <li class="item_box">
+                <a href="">
+                    <img src="https://image.rakuten.co.jp/nishida-store/cabinet/06059528/imgrc0091856073.jpg" width="100%" alt="">
+                </a>
+            </li>
+            <li class="item_box">
+                <a href="">
+                    <img src="https://image.rakuten.co.jp/nishida-store/cabinet/06059528/imgrc0091832780.jpg" width="100%" alt="">
+                </a>
+            </li>
+            <li class="item_box">
+                <a href="">
+                    <img src="https://image.rakuten.co.jp/nishida-store/cabinet/06059528/imgrc0092777391.jpg" width="100%" alt="">
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div id="button_box">
+        <button id="prev">prev</button>
+        <button id="next">next</button>
+        <p id="count"></p>
+    </div>
+
+    <script>
+
+        const ul = document.getElementById('slide');
+        const li = document.querySelectorAll('.item_box');
+        let Width = ul.clientWidth;
+
+        const prev = document.getElementById('prev');
+        const next = document.getElementById('next');
+
+        let molecule = 1;
+        const count = document.getElementById('count');
+        count.innerText = molecule +'/' + li.length;
+
+
+        let counter = 0;
+
+        next.addEventListener('click',function () {
+            if (counter < li.length-1) {
+                ul.style.transition = "1s";
+                count.innerText = molecule+1 + '/' + li.length;
+                counter++;
+                molecule++;
+                ul.style.transform = "translateX("+ (- Width * counter) + "px)";              
+            }
+            
+        })
+
+        prev.addEventListener('click',function () {
+            if (counter === 0) {
+                prev.disable = ture;
+            }else {
+                ul.style.transition = "1s";
+                count.innerText = molecule-1 + '/' + li.length;
+                counter--; 
+                molecule--;
+                ul.style.transform = "translateX("+ (- Width * counter) + "px)";    
+            }         
+            
+        })
+        console.log(Width);
+
+
+    </script>
+    
+</body>
+</html>
